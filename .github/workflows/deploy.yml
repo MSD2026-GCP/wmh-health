@@ -27,8 +27,8 @@ jobs:
 
     steps:
       - name: Set environment variables based on branch
-      id: set-env
-      run: |
+        id: set-env
+        run: |
            if [[ "${{ github.ref_name }}" == "main" ]]; then
              echo "service_name=${{ env.PROJECT_KEY }}-dashboard-prod" >> $GITHUB_OUTPUT
              echo "environment=production"             >> $GITHUB_OUTPUT
