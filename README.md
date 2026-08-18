@@ -29,6 +29,8 @@ wmh-health/
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml     # Workflow otomasi Build & Deploy ke GCP Cloud Run via GitHub Actions
+├── Dockerfile             # Konfigurasi containerization Docker berbasis nginx:alpine
+├── nginx.conf             # Konfigurasi server Nginx yang melayani static assets di port 8080
 ├── index.html             # Struktur semantik layout utama aplikasi
 ├── index.css              # Aturan styling Vibe Design System & Glassmorphism
 ├── app.js                 # Pengolah logika state kalkulasi harian & interaksi visual
