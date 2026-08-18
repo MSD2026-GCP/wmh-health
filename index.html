@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Nutrisi Harian | Wellness Tracker</title>
+  <meta name="description" content="Pantau sisa anggaran kalori harian dan rasio makronutrisi harian Anda secara real-time dengan aplikasi Wellness Tracker & Health Monitoring.">
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <!-- App Background Glow Effects -->
+  <div class="glow-bg glow-purple"></div>
+  <div class="glow-bg glow-cyan"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand-section">
+        <div class="app-logo">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#logo-grad)"/>
+            <defs>
+              <linearGradient id="logo-grad" x1="2" y1="3" x2="22" y2="21.35" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#8B5CF6" />
+                <stop offset="100%" stop-color="#EC4899" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>Wellness Tracker</h1>
+          <p class="tagline">Workshop MSD - Health</p>
+        </div>
+      </div>
+      <div class="user-badge" id="user-profile-badge">
+        <div class="avatar">FA</div>
+        <div class="user-info">
+          <span class="user-name">Faisal Akbar</span>
+          <span class="user-role">Pengguna Aktif</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Column Left: Visualisation and Core Formula -->
+      <section class="glass-card main-viz-section" aria-labelledby="nutrition-title">
+        <div class="card-header">
+          <div class="title-badge purple-pink-gradient-text">Story 2.2</div>
+          <h2 id="nutrition-title" class="section-title">Ringkasan Nutrisi Harian</h2>
+          <p class="section-subtitle">Visualisasi sisa anggaran kalori dan rasio makronutrisi harian Anda.</p>
+        </div>
+
+        <div class="caloric-dashboard-view">
+          <!-- Circular Progress Diagram -->
+          <div class="chart-container">
+            <div class="circular-progress" id="calorie-ring-wrapper">
+              <svg class="progress-ring-svg" width="260" height="260">
+                <circle class="progress-ring-bg" stroke="rgba(255,255,255,0.1)" stroke-width="14" fill="transparent" r="110" cx="130" cy="130" />
+                <circle class="progress-ring-bar" id="calorie-progress-bar" stroke="url(#progress-grad)" stroke-width="16" stroke-linecap="round" fill="transparent" r="110" cx="130" cy="130" />
+                <defs>
+                  <linearGradient id="progress-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#8B5CF6" />
+                    <stop offset="100%" stop-color="#EC4899" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <!-- Center Metric Text -->
+              <div class="circle-content">
+                <span class="remaining-label">SISA KALORI</span>
+                <span class="remaining-value animate-pop" id="remaining-calories-val">1.650</span>
+                <span class="kcal-unit">kkal</span>
+                <span class="percentage-achievement" id="calories-percentage-label">75% sisa</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formula Display: Target - Makanan + Olahraga = Sisa -->
+          <div class="formula-card glass-card-nested" id="caloric-formula-container">
+            <div class="formula-header">
+              <span>Formula Sisa Kalori Hari Ini</span>
+              <span class="formula-info-icon" title="Formula kalkulasi standar kesehatan harian">ⓘ</span>
+            </div>
+            <div class="formula-equation" id="caloric-formula">
+              <div class="equation-term" id="term-target">
+                <span class="term-number" id="formula-target-val">2.200</span>
+                <span class="term-label">Target Kalori</span>
+              </div>
+              <div class="equation-operator">-</div>
+              <div class="equation-term" id="term-food">
+                <span class="term-number color-pink" id="formula-food-val">800</span>
+                <span class="term-label">Kalori Makanan</span>
+              </div>
+              <div class="equation-operator">+</div>
+              <div class="equation-term" id="term-burned">
+                <span class="term-number color-cyan" id="formula-burned-val">250</span>
+                <span class="term-label">Kalori Terbakar</span>
+              </div>
+              <div class="equation-operator">=</div>
+              <div class="equation-term term-result" id="term-remaining">
+                <span class="term-number" id="formula-remaining-val">1.650</span>
+                <span class="term-label">Sisa Kalori</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Column Right: Macros and Interactive Simulator -->
+      <div class="right-column-grid">
+        
+        <!-- Macronutrients Card -->
+        <section class="glass-card macros-section" aria-labelledby="macros-title">
+          <h2 id="macros-title" class="section-title-small">Rasio Makronutrisi Harian</h2>
+          <p class="section-subtitle">Keseimbangan asupan nutrisi protein, karbohidrat, dan lemak hari ini.</p>
+
+          <div class="macros-container">
+            <!-- Carb macro -->
+            <div class="macro-bar-item">
+              <div class="macro-info">
+                <span class="macro-name">Karbohidrat</span>
+                <span class="macro-values">
+                  <strong id="carbs-logged">100g</strong> <span class="macro-target">/ 275g (40%)</span>
+                </span>
+              </div>
+              <div class="progress-bar-wrapper">
+                <div class="progress-bar-fill bg-carb" id="carbs-progress" style="width: 36.3%;"></div>
+              </div>
+              <span class="macro-percent-label" id="carbs-percent-label">36% tercapai</span>
+            </div>
+
+            <!-- Protein macro -->
+            <div class="macro-bar-item">
+              <div class="macro-info">
+                <span class="macro-name">Protein</span>
+                <span class="macro-values">
+                  <strong id="protein-logged">60g</strong> <span class="macro-target">/ 110g (25%)</span>
+                </span>
+              </div>
+              <div class="progress-bar-wrapper">
+                <div class="progress-bar-fill bg-protein" id="protein-progress" style="width: 54.5%;"></div>
+              </div>
+              <span class="macro-percent-label" id="protein-percent-label">55% tercapai</span>
+            </div>
+
+            <!-- Fat macro -->
+            <div class="macro-bar-item">
+              <div class="macro-info">
+                <span class="macro-name">Lemak</span>
+                <span class="macro-values">
+                  <strong id="fat-logged">30g</strong> <span class="macro-target">/ 73g (35%)</span>
+                </span>
+              </div>
+              <div class="progress-bar-wrapper">
+                <div class="progress-bar-fill bg-fat" id="fat-progress" style="width: 41.1%;"></div>
+              </div>
+              <span class="macro-percent-label" id="fat-percent-label">41% tercapai</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Interactive Sandbox / Simulator Panel -->
+        <section class="glass-card simulator-section" aria-labelledby="simulator-title">
+          <div class="simulator-header">
+            <span class="live-indicator"><span class="pulse-dot"></span>Interactive Simulator</span>
+            <h2 id="simulator-title" class="section-title-small">Uji Formula Nutrisi</h2>
+          </div>
+          <p class="section-subtitle">Gunakan slider di bawah ini untuk melihat bagaimana sistem menghitung sisa kalori secara otomatis!</p>
+
+          <div class="simulator-controls">
+            <!-- Slider 1: Target Calories -->
+            <div class="control-group">
+              <div class="control-labels">
+                <label for="input-target-calories">Target Kalori Harian</label>
+                <span class="control-val" id="display-target-calories">2.200 kkal</span>
+              </div>
+              <input type="range" id="input-target-calories" class="styled-slider" min="1200" max="4000" step="50" value="2200" aria-valuemin="1200" aria-valuemax="4000" aria-valuenow="2200">
+            </div>
+
+            <!-- Slider 2: Food Calories -->
+            <div class="control-group">
+              <div class="control-labels">
+                <label for="input-food-calories">Kalori Makanan Terkonsumsi</label>
+                <span class="control-val color-pink" id="display-food-calories">800 kkal</span>
+              </div>
+              <input type="range" id="input-food-calories" class="styled-slider pink-slider" min="0" max="3500" step="10" value="800" aria-valuemin="0" aria-valuemax="3500" aria-valuenow="800">
+            </div>
+
+            <!-- Slider 3: Burned Calories -->
+            <div class="control-group">
+              <div class="control-labels">
+                <label for="input-burned-calories">Kalori Terbakar (Olahraga)</label>
+                <span class="control-val color-cyan" id="display-burned-calories">250 kkal</span>
+              </div>
+              <input type="range" id="input-burned-calories" class="styled-slider cyan-slider" min="0" max="1500" step="10" value="250" aria-valuemin="0" aria-valuemax="1500" aria-valuenow="250">
+            </div>
+          </div>
+
+          <!-- Quick Actions Panel -->
+          <div class="quick-actions">
+            <span class="quick-actions-title">Pencatatan Cepat</span>
+            <div class="action-buttons-grid">
+              <button class="action-btn" id="btn-add-rice" data-calories="200" data-carbs="45" data-protein="4" data-fat="0.5">
+                <span class="btn-emoji">🍚</span> 1 Porsi Nasi (+200 kkal)
+              </button>
+              <button class="action-btn" id="btn-add-chicken" data-calories="250" data-carbs="0" data-protein="27" data-fat="15">
+                <span class="btn-emoji">🍗</span> Dada Ayam (+250 kkal)
+              </button>
+              <button class="action-btn" id="btn-add-run" data-calories="300">
+                <span class="btn-emoji">🏃</span> Lari 30 Menit (+300 kkal)
+              </button>
+              <button class="action-btn" id="btn-add-swim" data-calories="400">
+                <span class="btn-emoji">🏊</span> Berenang 30m (+400 kkal)
+              </button>
+            </div>
+            <button class="reset-button" id="btn-reset-data">🔄 Reset Data ke Nilai Awal</button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-links">
+        <a href="#" class="footer-link">Sistem Desain (Vibe Design)</a>
+        <span class="footer-dot">•</span>
+        <a href="https://mii-team-pvqkohd7.atlassian.net/browse/WMH-27" class="footer-link" target="_blank" rel="noopener noreferrer">Jira WMH-27</a>
+        <span class="footer-dot">•</span>
+        <a href="https://mii-team-pvqkohd7.atlassian.net/wiki/spaces/WMH" class="footer-link" target="_blank" rel="noopener noreferrer">Confluence Wiki</a>
+      </div>
+      <p class="footer-copy">© 2026 Wellness Tracker App. Built for Workshop MSD - Health (WMH).</p>
+    </footer>
+  </div>
+
+  <!-- JavaScript logic -->
+  <script src="app.js"></script>
+</body>
+</html>
