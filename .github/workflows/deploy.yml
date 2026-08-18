@@ -10,8 +10,8 @@ env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   REGION: asia-southeast2
   ARTIFACT_REGISTRY: asia-southeast2-docker.pkg.dev
-  PROJECT_KEY: wmh
-  IMAGE_NAME: wmh-dashboard
+  PROJECT_KEY: wms
+  IMAGE_NAME: wms-dashboard
 
 jobs:
   # ──────────────────────────────────────────────────────────────
@@ -27,17 +27,17 @@ jobs:
 
     steps:
       - name: Set environment variables based on branch
-        id: set-env
-        run: |
-          if [[ "${{ github.ref_name }}" == "main" ]]; then
-            echo "service_name=${{ env.PROJECT_KEY }}-dashboard-prod" >> $GITHUB_OUTPUT
-            echo "environment=production"             >> $GITHUB_OUTPUT
-            echo "image_tag=prod-${{ github.sha }}"  >> $GITHUB_OUTPUT
-          else
-            echo "service_name=${{ env.PROJECT_KEY }}-dashboard-dev" >> $GITHUB_OUTPUT
-            echo "environment=staging"               >> $GITHUB_OUTPUT
-            echo "image_tag=dev-${{ github.sha }}"   >> $GITHUB_OUTPUT
-          fi
+      id: set-env
+      run: |
+           if [[ "${{ github.ref_name }}" == "main" ]]; then
+             echo "service_name=${{ env.PROJECT_KEY }}-dashboard-prod" >> $GITHUB_OUTPUT
+             echo "environment=production"             >> $GITHUB_OUTPUT
+             echo "image_tag=prod-${{ github.sha }}"  >> $GITHUB_OUTPUT
+           else
+             echo "service_name=${{ env.PROJECT_KEY }}-dashboard-dev" >> $GITHUB_OUTPUT
+             echo "environment=staging"               >> $GITHUB_OUTPUT
+             echo "image_tag=dev-${{ github.sha }}"   >> $GITHUB_OUTPUT
+           fi
 
   # ──────────────────────────────────────────────────────────────
   # JOB 2: Build Docker image & push to Artifact Registry
