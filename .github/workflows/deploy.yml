@@ -49,7 +49,7 @@ jobs:
 
     permissions:
       contents: read
-      id-token: write   # Required for Workload Identity Federation
+      id-token: write
 
     outputs:
       image_uri: ${{ steps.build-push.outputs.image_uri }}
@@ -58,13 +58,12 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      # Authenticate to GCP via Workload Identity Federation (keyless, recommended)
+      # Authenticate to GCP using Service Account JSON Key (Stored in GitHub Secrets)
       - name: Authenticate to Google Cloud
         id: auth
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
@@ -107,11 +106,11 @@ jobs:
       id-token: write
 
     steps:
+      # Authenticate to GCP using Service Account JSON Key (Stored in GitHub Secrets)
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Deploy to Cloud Run (Staging)
         id: deploy
@@ -153,11 +152,11 @@ jobs:
       id-token: write
 
     steps:
+      # Authenticate to GCP using Service Account JSON Key (Stored in GitHub Secrets)
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Deploy to Cloud Run (Production)
         id: deploy
